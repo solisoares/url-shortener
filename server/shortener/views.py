@@ -12,4 +12,22 @@ def index(request: HttpRequest, short_url: Union[str, None] = None):
 
 def shorten(request: HttpRequest):
     # TODO
-    return HttpResponseRedirect(reverse("shortener:index"))
+    # - colect original url
+    # - generate shortened url
+    # - save to database
+    # - redirect to shortened view with shortened url as arg
+
+    # STUB
+    shortened_url = "SHORTENED URL"
+    return HttpResponseRedirect(reverse("shortener:shortened", args=(shortened_url,)))
+
+
+def shortened(request: HttpRequest, shortened_url: Union[str, None]):
+    # TODO
+    # - get shortened and original url from database
+    # - render the shortened page with original and shortened url as context
+
+    # STUB
+    original_url = "ORIGINAL URL"
+    context = {"original_url": original_url, "shortened_url": shortened_url}
+    return render(request, "shortener/shortened.html", context)
