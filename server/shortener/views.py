@@ -19,7 +19,7 @@ def index(request: HttpRequest):
                 "shortener/index.html",
                 {
                     "shortener_form": shortener_form,
-                    "shortened_url": f"http://{request.get_host()}/"
+                    "shortened_url": f"http://{request.get_host()}/shortener/"
                     + url_model.short_url,
                 },
             )
