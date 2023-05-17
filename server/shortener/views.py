@@ -1,5 +1,6 @@
 from django.http import HttpRequest
 from django.shortcuts import render
+from django.urls import reverse
 
 from .forms import ShortenerForm
 from .models import URL
@@ -19,7 +20,8 @@ def index(request: HttpRequest):
                 "shortener/index.html",
                 {
                     "shortener_form": shortener_form,
-                    "shortened_url": f"http://{request.get_host()}/shortener/"
+                    "shortened_url": f"http://{request.get_host()}"
+                    + reverse("shortener:index")
                     + url_model.short_url,
                 },
             )
