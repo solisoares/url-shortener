@@ -15,16 +15,25 @@
         <div class="card text-center">
             <div class="card-header">The Best URL Shortener!</div>
             <div class="card-body">
+                <br>
                 <p>Please enter a URL to shorten</p>
-                <form action="{% url 'shortener:shorten' %}" method="post">
+                <form action="{% url 'shortener:index' %}" method="post">
                     {% csrf_token %}
-                    <input type="text"
-                           name="original_url"
-                           placeholder="www.example.com"
-                           style="text-align: center;
-                                  width: 400px">
-                    <button type="submit">Shorten It!</button>
+                    {{ shortener_form }}
+                    <input type="submit" value="Shorten It!">
                 </form>
+                <br>
+                <br>
+                {% if shortened_url %}
+                    <p>The shortened URL</p>
+                    <div style="display:inline-block;
+                                width: 250px;
+                                height: 30px;
+                                border: 1px solid gray;
+                                text-align: center">
+                        <p style="color: gray;">{{ shortened_url }}</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </body>
