@@ -1,4 +1,5 @@
 from django.http import HttpRequest
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -30,3 +31,8 @@ def index(request: HttpRequest):
         shortener_form = ShortenerForm()
 
     return render(request, "shortener/index.html", {"shortener_form": shortener_form})
+
+
+def redirect_hash_url(request: HttpRequest, hash):
+    url_model = URL.objects.get(short_url=hash)
+    return HttpResponseRedirect(url_model.original_url)
