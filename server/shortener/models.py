@@ -2,6 +2,10 @@ from django.db import models
 
 import hashids
 
+
+hash_creator = hashids.Hashids(salt="42", min_length=5)
+
+
 # Create your models here.
 class URL(models.Model):
     original_url = models.URLField(unique=True, max_length=200)
@@ -16,13 +20,9 @@ class URL(models.Model):
         super().save(*args, **kwargs)  # regular saving process
 
         if is_new:
-            self.short_url = self._hash_url()
+            self.short_url = hash_creator.encode(self.pk)
             super().save(update_fields=["short_url"])
 
-    def _hash_url(self):
-        hashid = hashids.Hashids(salt="42", min_length=5)
-        return hashid.encode(self.pk)
-    
     def update_access_count(self):
         self.access_count = models.F("access_count") + 1
         self.save()
