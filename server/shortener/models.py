@@ -30,3 +30,6 @@ class URL(models.Model):
         self.access_count = F("access_count") + 1
         self.last_access_datetime = datetime.now()
         self.save()
+
+    def __str__(self):
+        return f"{self.original_url} :: {self.short_url}"
