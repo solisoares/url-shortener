@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.db import models
+from django.db.models import F
 
 import hashids
 
@@ -11,7 +14,7 @@ class URL(models.Model):
     original_url = models.URLField(unique=True, max_length=200)
     short_url = models.CharField(unique=True, max_length=5, blank=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
-    last_access_datetime = models.DateTimeField(auto_now=True)
+    last_access_datetime = models.DateTimeField(null=True)
     access_count = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
@@ -23,6 +26,7 @@ class URL(models.Model):
             self.short_url = hash_creator.encode(self.pk)
             super().save(update_fields=["short_url"])
 
-    def update_access_count(self):
-        self.access_count = models.F("access_count") + 1
+    def update_last_access(self):
+        self.access_count = F("access_count") + 1
+        self.last_access_datetime = datetime.now()
         self.save()

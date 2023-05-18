@@ -35,5 +35,5 @@ def index(request: HttpRequest):
 
 def redirect_hash_url(request: HttpRequest, hash):
     url_model = URL.objects.get(short_url=hash)
-    url_model.update_access_count()
+    url_model.update_last_access()
     return HttpResponseRedirect(url_model.original_url)
