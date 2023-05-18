@@ -22,3 +22,7 @@ class URL(models.Model):
     def _hash_url(self):
         hashid = hashids.Hashids(salt="42", min_length=5)
         return hashid.encode(self.pk)
+    
+    def update_access_count(self):
+        self.access_count = models.F("access_count") + 1
+        self.save()
