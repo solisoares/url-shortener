@@ -12,6 +12,13 @@
         <title>The Best URL Shortener!</title>
     </head>
     <body class="container pt-5">
+        {% if messages %}
+        <div class="alert">
+          {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
         <div class="card text-center">
             <div class="card-header">The Best URL Shortener!</div>
             <div class="card-body">
@@ -29,7 +36,7 @@
                     <div style="display:inline-block;
                                 width: 300px;
                                 height: 30px;
-shortene                                border: 1px solid gray;
+                                shortene                                border: 1px solid gray;
                                 text-align: center">
                         <p style="color: gray;">{{ shortened_url }}</p>
                     </div>
