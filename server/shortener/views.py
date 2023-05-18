@@ -3,8 +3,8 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .forms import ShortenerForm
-from .models import URL
+from shortener.forms import ShortenerForm
+from shortener.models import URL
 
 
 # Create your views here.
