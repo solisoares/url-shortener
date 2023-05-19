@@ -23,8 +23,9 @@ def index(request: HttpRequest):
                 {
                     "shortener_form": shortener_form,
                     "shortened_url": f"http://{request.get_host()}"
-                    + reverse("shortener:index")
-                    + url_model.short_url,
+                    + reverse(
+                        "shortener:redirect_hash_url", args=[url_model.short_url]
+                    ),
                 },
             )
 
