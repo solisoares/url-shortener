@@ -16,8 +16,7 @@ def index(request: HttpRequest):
 
         if shortener_form.is_valid():
             original_url: str = shortener_form.cleaned_data["original_url"]
-            url_model = URL(original_url=original_url)
-            url_model.save()
+            url_model, _ = URL.objects.get_or_create(original_url=original_url)
             return render(
                 request,
                 "shortener/index.html",
