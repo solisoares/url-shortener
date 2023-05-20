@@ -1,0 +1,10 @@
+.original-url {
+    text-align: center
+}
+
+.short-url-box {
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+}
