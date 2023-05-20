@@ -10,15 +10,17 @@
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
         <title>The Best URL Shortener!</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'shortener/style.css' %}">
     </head>
     <body class="container pt-5">
         {% if messages %}
-        <div class="alert">
-          {% for message in messages %}
-            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
+            <div class="alert">
+                {% for message in messages %}
+                    <p {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="card text-center">
             <div class="card-header">The Best URL Shortener!</div>
             <div class="card-body">
@@ -33,12 +35,8 @@
                 <br>
                 {% if shortened_url %}
                     <p>The shortened URL</p>
-                    <div style="display:inline-block;
-                                width: 300px;
-                                height: 30px;
-                                shortene                                border: 1px solid gray;
-                                text-align: center">
-                        <p style="color: gray;">{{ shortened_url }}</p>
+                    <div class="short-url-box">
+                        <p class="short-url-link">{{ shortened_url }}</p>
                     </div>
                 {% endif %}
             </div>

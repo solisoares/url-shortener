@@ -6,6 +6,6 @@ class ShortenerForm(forms.Form):
         label="",
         max_length=200,
         widget=forms.TextInput(
-            attrs={"placeholder": "www.example.com", "style": "text-align: center;"}
+            attrs={"placeholder": "www.example.com", "class": "original-url"}
         ),
     )
