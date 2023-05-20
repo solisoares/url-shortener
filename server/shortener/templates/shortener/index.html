@@ -36,7 +36,7 @@
                 {% if shortened_url %}
                     <p>The shortened URL</p>
                     <div class="short-url-box">
-                        <p class="short-url-link">{{ shortened_url }}</p>
+                        <a class="short-url-link" href="{{ shortened_url }}">{{ shortened_url }}</a>
                     </div>
                 {% endif %}
             </div>
