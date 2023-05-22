@@ -4,8 +4,14 @@ from shortener.models import URL
 
 
 class URLAdmin(admin.ModelAdmin):
-    readonly_fields = (
+    fields = (
         "original_url",
+        "short_url",
+        "creation_datetime",
+        "last_access_datetime",
+        "access_count",
+    )
+    readonly_fields = (
         "short_url",
         "creation_datetime",
         "last_access_datetime",
