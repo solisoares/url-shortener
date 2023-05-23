@@ -4,12 +4,13 @@ from django.http import HttpRequest
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
 from shortener.forms import ShortenerForm
 from shortener.models import URL
 
 
-# Create your views here.
+@require_http_methods(["GET", "POST"])
 def index(request: HttpRequest):
     if request.method == "POST":
         shortener_form = ShortenerForm(request.POST)
@@ -35,6 +36,7 @@ def index(request: HttpRequest):
     return render(request, "shortener/index.html", {"shortener_form": shortener_form})
 
 
+@require_http_methods(["GET"])
 def redirect_hash_url(request: HttpRequest, hash):
     try:
         url_model = URL.objects.get(short_url=hash)
