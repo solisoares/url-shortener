@@ -14,7 +14,7 @@ class URL(models.Model):
     original_url = models.URLField(unique=True, max_length=200)
     short_url = models.CharField(unique=True, max_length=5, blank=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
-    last_access_datetime = models.DateTimeField(null=True)
+    last_access_datetime = models.DateTimeField(null=True, blank=True)
     access_count = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
@@ -29,7 +29,7 @@ class URL(models.Model):
     def update_last_access(self):
         self.access_count = F("access_count") + 1
         self.last_access_datetime = datetime.now()
-        self.save()
+        self.save(update_fields=["access_count", "last_access_datetime"])
 
     def __str__(self):
         return f"{self.original_url} :: {self.short_url}"
